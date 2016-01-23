@@ -76,6 +76,7 @@ def run_game(game, bot_paths, options):
 			
 			alive_bot_list = [(bid, bot) for (bid, bot) in enumerate(bots) if game.is_alive(bid)]
 			moves, errors, statuses = get_moves(game, alive_bot_list, time_limit, turn, options["game_log"])
+			# moves is a dict of lists. Each list is the list of lines read from stdout
 
 			# process errors
 			for bid in errors.keys():
@@ -305,4 +306,5 @@ def get_moves(game, bots, time_limit, turn, global_game_log):
 			game.kill_player(b)
 			bot.kill()
 	# remember that these are dicts!!
+	# bot_moves[bid] is a list of lines, unstripped
 	return bot_moves, error_lines, statuses
